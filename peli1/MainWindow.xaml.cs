@@ -34,6 +34,7 @@ namespace peli1
     public partial class MainWindow : Window
     {
          
+        
         int n = 0;
         //Line myLine = new Line();
         Line[] lines = new Line[1000];
@@ -51,91 +52,63 @@ namespace peli1
         Pali myPal = new Pali();
         Kentta ke = new Kentta();
 
-        int[,] C2 = new int[200, 200];
+        int[,] C2 = new int[400, 400];
         //int[,] pali = new int[10, 10];
         Random r = new Random();
         int px = 20, py = 20;
         int pisteet = 0,lask=0;
                 
         public MainWindow()
-        { 
-            InitializeComponent(); 
-            /*myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
-            myLine.X1 = n;
-            myLine.X2 = 50;
-            myLine.Y1 = n++;
-            myLine.Y2 = 50;*/
-            //C.SetValue.ActualHeight(100);
-
-            //double[][] C2;
-            //double a = C.ActualWidth()int[,] arr = new int[100, 100]; ;
-            
-
-            for (int x = 0; x < 200; x++)
+        {
+            try
             {
-                for (int y = 0; y < 200; y++)
+
+            InitializeComponent(); 
+           
+            for (int x = 0; x < 400; x++)
+            {
+                for (int y = 0; y < 400; y++)
                 {
-                    //AddPixel(x, y, Colors.Blue);
                     C2[x, y] = 0;
                 }
             }
 
-            
-
-            //    Linja(0, 0, C.ActualWidth, C, 0);
-            /*myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
-            myLine.X1 = rnd.Next(100);
-            myLine.X2 = rnd.Next(100);
-            myLine.Y1 = rnd.Next(100);
-            myLine.Y2 = rnd.Next(100);
-            myLine.HorizontalAlignment = HorizontalAlignment.Left;
-            myLine.VerticalAlignment = VerticalAlignment.Center;
-            myLine.StrokeThickness = 2;
-            C.Children.Add(myLine);*/
-
             TeeP(px, py);
-            AlustaK(10, 10, 10);
-            TeeK(10,10);
+            AlustaK(20, 20, 10);
+            TeeK(20,20);
             TeeR();
-            
-            //TeeK2();
-            //aseP();
-            //LaitaP(100, 100, myPal);
-
+           
             myEl.Stroke = System.Windows.Media.Brushes.Red;
             myEl.Width = 40;
             myEl.Height = 50;
-            /*Canvas.SetTop(myEl, 100);
-            Canvas.SetLeft(myEl, 100);*/
+            
             Canvas.SetTop(myEl, myPa.Ypal - (myEl.ActualHeight) / 2); //
             Canvas.SetLeft(myEl, myPa.Xpal - (myEl.ActualWidth) / 2); //
-            //myEl.Canvas=10;
+            
             C.Children.Add(myEl);
             Point myP = new Point();
-            myP.X = 100; 
-            myP.Y = 100;
+            myP.X = 200; 
+            myP.Y = 200;
 
             Time = TimeSpan.Zero;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(20); // Muuttele tätä
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
-            /*Color  t = Colors.Yellow;
 
-            AddPixel(150, 150, Colors.Red);
-            t = GetPixelColor(myP);*/
-/*            for (int i = 0; i < 40; i++)
+            }
+            catch (Exception)
             {
-                //C.SetPixel(C, 140 + 1, 140, RGB(10, 10,10)); 
-                AddPixel(170 + i, 170, Colors.Red);
 
-            }*/
-
-
+                throw;
+            }
         }
 
-        private int AlustaK(int xkoko,int ykoko,int maara)
+        private void AlustaK(int xkoko,int ykoko,int maara)
         {
+            try
+            {
+
             int[] taul = new int[maara];
             
             for (int i = 1; i <= xkoko; i++)
@@ -155,7 +128,6 @@ namespace peli1
             taul[r.Next(maara)] = 5;
             taul[r.Next(maara)] = 6;
             int l = 0;
-            // Populating the lists
             for (int i = 0; i < xkoko; i++)
             {
                 for (int j = 0; j < ykoko; j++)
@@ -176,29 +148,29 @@ namespace peli1
                         lask++;
                     }
                     ke.Lt[i].Add(taul[l++]);
-                    //ke.Lt[i].Add(taul[l++]);
                 }
             }
             ke.Lt[xkoko / 2][ykoko / 2] = 0;
             ke.Lt[xkoko / 2+1][ykoko / 2] = 0;
             ke.Lt[xkoko / 2][ykoko / 2+1] = 0;
             ke.Lt[xkoko / 2+1][ykoko / 2+1] = 0;
-            //ke.Lt[xkoko / 2][ykoko / 2] = 0;
             ke.Lt[xkoko / 2 - 1][ykoko / 2] = 0;
             ke.Lt[xkoko / 2][ykoko / 2 - 1] = 0;
             ke.Lt[xkoko / 2 - 1][ykoko / 2 - 1] = 0;
-            return maara;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        private int TeeK(int xkoko,int ykoko) 
+        private void TeeK(int xkoko,int ykoko) 
         {
-            /*Rectangle rec = new Rectangle();
-            Canvas.SetTop(rec, y);
-            Canvas.SetLeft(rec, x);
-            rec.Width = 1;
-            rec.Height = 1;
-            rec.Fill = new SolidColorBrush(c);
-            C.Children.Add(rec);*/
+            try
+            {
+
+            
             for (int i = 0; i < xkoko; i++)
             {
                 for (int j = 0; j < ykoko; j++)
@@ -254,12 +226,20 @@ namespace peli1
                     }
                 }
             }
-            return xkoko*ykoko;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
         }
 
-        private double AddPixel(double x, double y, Color c)
+        private void AddPixel(double x, double y, Color c) // tätä ei käytetä hitauden vuoksi
         {
+            try
+            {
+
+            
             Rectangle rec = new Rectangle();
             Canvas.SetTop(rec, y);
             Canvas.SetLeft(rec, x);
@@ -267,7 +247,12 @@ namespace peli1
             rec.Height = 1;
             rec.Fill = new SolidColorBrush(c);
             C.Children.Add(rec);
-            return x * y;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private TimeSpan Time
@@ -279,14 +264,16 @@ namespace peli1
             set
             {
                 time = value;
-                //OnPropertyChanged("Time");
-                //infoPanel.Time = time;
             }
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
 
+            try
+            {
+
+            
             Time += TimeSpan.FromMilliseconds(100);
 
             textBox.Text = "";
@@ -299,14 +286,8 @@ namespace peli1
             if ((C2[myPa.Xpal, myPa.Ypal] == 2 || C2[myPa.Xpal, myPa.Ypal] == 5 || C2[myPa.Xpal, myPa.Ypal] == 6) && (myPa.Xspeed != 0 || myPa.Yspeed != 0))
             {
                 textBox1.Text = "Pisteet" + (pisteet++).ToString();
-                //ke.Lt[myPa.Xpal / px][myPa.Ypal / py] = 0; lask--
             }
-
-            /*myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
-            myLine.X1 = rnd.Next(100);
-            myLine.X2 = rnd.Next(100);
-            myLine.Y1 = rnd.Next(100);
-            myLine.Y2 = rnd.Next(100);*/
+                       
             if (myPa.Xspeed > 0)
             {
                 if (myPa.Xpal < C.ActualWidth - myPa.Xspeed) myPa.Xpal += myPa.Xspeed;
@@ -331,25 +312,13 @@ namespace peli1
 
             Canvas.SetTop(myEl, myPa.Ypal - (myEl.ActualHeight)/2); //
             Canvas.SetLeft(myEl, myPa.Xpal - (myEl.ActualWidth)/2); //
-
-             
-            /*myLine.HorizontalAlignment = HorizontalAlignment.Left;
-            myLine.VerticalAlignment = VerticalAlignment.Center;
-            myLine.StrokeThickness = 2;*/
-            // Uses the Keyboard.IsKeyDown to determine if a key is down.
-            // e is an instance of KeyEventArgs.
+            
             if (Keyboard.IsKeyDown(Key.Up))
             {
-                /*if (myPa.Yspeed > 0) myPa.Yspeed--;
-                else if (myPa.Yspeed < 0) myPa.Yspeed--;
-                else if (myPa.Yspeed == 0) myPa.Yspeed--;*/
                 if (myPa.Yspeed > -5) myPa.Yspeed--;
             }
             if (Keyboard.IsKeyDown(Key.Down))
             {
-                /*if (myPa.Yspeed > 0) myPa.Yspeed++;
-                else if (myPa.Yspeed < 0) myPa.Yspeed--;
-                else if (myPa.Yspeed == 0) myPa.Yspeed--;*/
                 if (myPa.Yspeed < 5) myPa.Yspeed++;
             }
             if (Keyboard.IsKeyDown(Key.Right))
@@ -360,20 +329,24 @@ namespace peli1
             {
                 if (myPa.Xspeed > -5) myPa.Xspeed--;
             }
-            //C.Children.Add(myLine);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
 
-            /*ball.MoveBall();
-            CheckWallCollisions();
-            CheckPaddleCollisions();
-            CheckBrickCollisions();*/
         }
 
-        private int TeeR()
+        private void TeeR()
         {
+            try
+            {
+
+            
             myLine2.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
             myLine2.X1 = 1;
-            myLine2.X2 = 200;
+            myLine2.X2 = 400;
             myLine2.Y1 = 1;
             myLine2.Y2 = 1;
             myLine2.HorizontalAlignment = HorizontalAlignment.Left;
@@ -383,9 +356,9 @@ namespace peli1
 
             myLine3.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
             myLine3.X1 = 1;
-            myLine3.X2 = 200;
-            myLine3.Y1 = 200;
-            myLine3.Y2 = 200;
+            myLine3.X2 = 400;
+            myLine3.Y1 = 400;
+            myLine3.Y2 = 400;
             myLine3.HorizontalAlignment = HorizontalAlignment.Left;
             myLine3.VerticalAlignment = VerticalAlignment.Center;
             myLine3.StrokeThickness = 2;
@@ -395,45 +368,42 @@ namespace peli1
             myLine4.X1 = 1;
             myLine4.X2 = 1;
             myLine4.Y1 = 1;
-            myLine4.Y2 = 200;
+            myLine4.Y2 = 400;
             myLine4.HorizontalAlignment = HorizontalAlignment.Left;
             myLine4.VerticalAlignment = VerticalAlignment.Center;
             myLine4.StrokeThickness = 2;
             C.Children.Add(myLine4);
 
             myLine5.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
-            myLine5.X1 = 200;
-            myLine5.X2 = 200;
+            myLine5.X1 = 400;
+            myLine5.X2 = 400;
             myLine5.Y1 = 1;
-            myLine5.Y2 = 200;
+            myLine5.Y2 = 400;
             myLine5.HorizontalAlignment = HorizontalAlignment.Left;
             myLine5.VerticalAlignment = VerticalAlignment.Center;
             myLine5.StrokeThickness = 2;
             C.Children.Add(myLine5);
-            return 200;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        private int TeeP(int xkoko,int ykoko)
+        private void TeeP(int xkoko,int ykoko)
         {
-            /*for (int x = 0; x < 10; x++)
+
+            try
             {
-                for (int y = 0; y < 10; y++)
-                {
-                    //AddPixel(x, y, Colors.Blue);
 
-
-                    /*List<List<int>> myPal.Pali = new List<List<int>>(); //Creates new nested List
-                    matrix.Add(new List<int>()); //Adds new sub List
-                    myPal.Pal[x].Add(1);*/
-            /*        }
-                }*/
+            
             for (int i = 0; i < xkoko; i++)
             {
                 List<int> list1 = new List<int>();
                 myPal.Pal.Add(list1);
             }
 
-            // Populating the lists
             for (int i = 0; i < xkoko; i++)
             {
                 for (int j = 0; j < ykoko; j++)
@@ -441,48 +411,42 @@ namespace peli1
                     myPal.Pal[i].Add(1);
                 }
             }
-            //return myPal.Pal; TEE TÄMÄ
-            return xkoko + ykoko;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        private double LaitaP(double x2, double y2, int laatu)
+        private void LaitaP(double x2, double y2, int laatu)
         {
-            /*Rectangle rec = new Rectangle();
-            Canvas.SetTop(rec, y);
-            Canvas.SetLeft(rec, x);
-            rec.Width = 1;
-            rec.Height = 1;
-            rec.Fill = new SolidColorBrush(c);
-            C.Children.Add(rec);*/
+            try
+            {
+
+            
             for (double y = 0; y < myPal.Pal[0].Count; y++)
             {
                 for (double x = 0; x < myPal.Pal.Count; x++)
                 {
-                    //AddPixel(x2+x, y2+y, Colors.Blue);
-                    C2[(int)(x2 + x),(int)( y2 + y)] = laatu;//myPal.Pal[x][y];
+                    C2[(int)(x2 + x),(int)( y2 + y)] = laatu;
                 }
             }
-            return x2 * x2 + y2 * y2;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        private double LaitaL(double x2, double x3, double y2, double y3, int laatu)
+        private void LaitaL(double x2, double x3, double y2, double y3, int laatu)
         {
-            /*Rectangle rec = new Rectangle();
-            Canvas.SetTop(rec, y);
-            Canvas.SetLeft(rec, x);
-            rec.Width = 1;
-            rec.Height = 1;
-            rec.Fill = new SolidColorBrush(c);
-            C.Children.Add(rec);*/
-            /*if (y3 - y2 == 0)
-            {
-                while(x2<x3) C2[(int)(x2++), (int)(y2)] = laatu;
-            }
-            if (x3 - x2 == 0)
-            {
-                while (y2 < y3) C2[(int)(x2), (int)(y2++)] = laatu;
-            }*/
 
+            try
+            {
+
+            
             int lisa = 0;
             if (x3 - x2 == 0) lisa = 1;
             int lisa2 = 0;
@@ -491,11 +455,15 @@ namespace peli1
             {
                 for (int x = 0; x < x3-x2+lisa; x++)
                 {
-                    //AddPixel(x2+x, y2+y, Colors.Blue);
-                    C2[(int)(x2 + x),(int) (y2 + y)] = laatu;//myPal.Pal[x][y];
+                    C2[(int)(x2 + x),(int) (y2 + y)] = laatu;
                 }
             }
-            return x2 * x2 + y2 * y2;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 
