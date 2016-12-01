@@ -78,11 +78,13 @@ namespace peli1
                 }
             }
 
-        /*    for(int i=0;i<20*20;i++) {
-                C.Children.Add(line[i]);
-            for (int i = 0; i < 20 * 20; i++) */
+            textBox2.Text = speed.ToString();
+            textBox4.Text = taso.ToString();
+            /*    for(int i=0;i<20*20;i++) {
+                    C.Children.Add(line[i]);
+                for (int i = 0; i < 20 * 20; i++) */
 
-                TeeP(px, py);
+            TeeP(px, py);
             AlustaK(20, 20, taso);
             TeeK(20,20);
             TeeR();
@@ -437,8 +439,9 @@ namespace peli1
                     //speed -= speed > 5 ? 1 : 0;
                     timer.Interval = TimeSpan.FromMilliseconds(speed);
                     taso -= taso > 5 ? 1 : 0;
+                    textBox4.Text = taso.ToString();
                     //tyhjennä canvas kopio
-                    for(int i = 0; i < 400; i++)
+                    for (int i = 0; i < 400; i++)
                     {
                         for (int j = 0; j < 400; j++)
                         {
