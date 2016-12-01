@@ -437,6 +437,15 @@ namespace peli1
                     //speed -= speed > 5 ? 1 : 0;
                     timer.Interval = TimeSpan.FromMilliseconds(speed);
                     taso -= taso > 5 ? 1 : 0;
+                    //tyhjennä canvas kopio
+                    for(int i = 0; i < 400; i++)
+                    {
+                        for (int j = 0; j < 400; j++)
+                        {
+                            C2[i,j] = 0;
+                        }
+                    }
+
                     UusiK(20, 20, taso);
                     for (int i = 0; i < re; i++) C.Children.Remove(rec[i]);
                     for (int i = 0; i < l; i++) C.Children.Remove(line[i]);
