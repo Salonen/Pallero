@@ -36,8 +36,9 @@ namespace peli1
          
         
         int n = 0;
+        int re = 0, l = 0;
         //Line myLine = new Line();
-        Line[] lines = new Line[1000];
+        Line[] line = new Line[20*20*100];
         public DispatcherTimer timer;
         TimeSpan time;
 
@@ -57,11 +58,13 @@ namespace peli1
         Random r = new Random();
         int px = 20, py = 20;
         int pisteet = 0,lask=0;
-                
+
+        Rectangle[] rec = new Rectangle[20*20*100];
+
         public MainWindow()
         {
-            try
-            {
+            /*try
+            {*/
 
             InitializeComponent(); 
            
@@ -73,7 +76,11 @@ namespace peli1
                 }
             }
 
-            TeeP(px, py);
+        /*    for(int i=0;i<20*20;i++) {
+                C.Children.Add(line[i]);
+            for (int i = 0; i < 20 * 20; i++) */
+
+                TeeP(px, py);
             AlustaK(20, 20, 10);
             TeeK(20,20);
             TeeR();
@@ -96,12 +103,12 @@ namespace peli1
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
 
-            }
+            /*}
             catch (Exception)
             {
 
                 throw;
-            }
+            }*/
         }
 
         private void AlustaK(int xkoko,int ykoko,int maara)
@@ -165,67 +172,59 @@ namespace peli1
             }
         }
 
-        private void TeeK(int xkoko,int ykoko) 
+        private void UusiK(int xkoko,int ykoko,int maara)
         {
             try
             {
 
-            
-            for (int i = 0; i < xkoko; i++)
-            {
-                for (int j = 0; j < ykoko; j++)
+                int[] taul = new int[maara];
+
+                /*for (int i = 1; i <= xkoko; i++)
                 {
-                    if (ke.Lt[i][j] == 1 || ke.Lt[i][j] == 2)
+                    List<int> list1 = new List<int>();
+                    ke.Lt.Add(list1);
+                }*/
+
+                for (int i = 0; i < maara; i++)
+                {
+                    taul[i] = 0;
+                }
+                taul[r.Next(maara)] = 1;
+                taul[r.Next(maara)] = 2;
+                taul[r.Next(maara)] = 3;
+                taul[r.Next(maara)] = 4;
+                taul[r.Next(maara)] = 5;
+                taul[r.Next(maara)] = 6;
+                int l = 0;
+                for (int i = 0; i < xkoko; i++)
+                {
+                    for (int j = 0; j < ykoko; j++)
+                    {
+                        if (l >= maara - 1)
+                        {
+                            l = 0;
+                            for (int k = 0; k < maara; k++)
                             {
-
-                                Rectangle rec = new Rectangle();
-                                Canvas.SetTop(rec, j * py); // VÄÄRINPÄIN OLIVAT
-                                Canvas.SetLeft(rec, i * px); 
-                                rec.Width = px;
-                                rec.Height = py;
-                                if(ke.Lt[i][j] == 1) rec.Fill = new SolidColorBrush(Colors.Blue);
-                                if (ke.Lt[i][j] == 2) rec.Fill = new SolidColorBrush(Colors.Green);
-                        C.Children.Add(rec);
-                        //C2[i *10, j *10] = 1;
-                        LaitaP(i * px, j * py, ke.Lt[i][j]); 
-                       
-                    }
-                    if (ke.Lt[i][j] == 3 || ke.Lt[i][j] == 5)
-                    {
-                        Line myLine = new Line();
-                        if (ke.Lt[i][j] == 3) myLine.Stroke = System.Windows.Media.Brushes.Blue;
-                        if (ke.Lt[i][j] == 5) myLine.Stroke = System.Windows.Media.Brushes.Green;
-                        myLine.X1 = i * px;
-                        myLine.X2 = i * px + px;
-                        myLine.Y1 = j * py + py / 2;
-                        myLine.Y2 = j * py + py / 2;
-                        myLine.HorizontalAlignment = HorizontalAlignment.Left;
-                        myLine.VerticalAlignment = VerticalAlignment.Center;
-                        myLine.StrokeThickness = 2;
-                        C.Children.Add(myLine);
-
-                        LaitaL(myLine.X1, myLine.X2, myLine.Y1, myLine.Y2, ke.Lt[i][j]);
-                    }
-                    if (ke.Lt[i][j] == 4 || ke.Lt[i][j] == 6)
-                    {
-
-                        Line myLine = new Line();
-                        if (ke.Lt[i][j] == 4) myLine.Stroke = System.Windows.Media.Brushes.Blue;
-                        if (ke.Lt[i][j] == 6) myLine.Stroke = System.Windows.Media.Brushes.Green;
-                        myLine.X1 = i * px + px / 2;
-                        myLine.X2 = i * px + px / 2;
-                        myLine.Y1 = j * py;
-                        myLine.Y2 = j * py + py;
-                        myLine.HorizontalAlignment = HorizontalAlignment.Left;
-                        myLine.VerticalAlignment = VerticalAlignment.Center;
-                        myLine.StrokeThickness = 2;
-                        C.Children.Add(myLine);
-
-                        LaitaL(myLine.X1, myLine.X2, myLine.Y1, myLine.Y2, ke.Lt[i][j]);
-
+                                taul[k] = 0;
+                            }
+                            taul[r.Next(maara)] = 1;
+                            taul[r.Next(maara)] = 2;
+                            taul[r.Next(maara)] = 3;
+                            taul[r.Next(maara)] = 4;
+                            taul[r.Next(maara)] = 5;
+                            taul[r.Next(maara)] = 6;
+                            lask++;
+                        }
+                        ke.Lt[i][j]=taul[l++];
                     }
                 }
-            }
+                ke.Lt[xkoko / 2][ykoko / 2] = 0;
+                ke.Lt[xkoko / 2 + 1][ykoko / 2] = 0;
+                ke.Lt[xkoko / 2][ykoko / 2 + 1] = 0;
+                ke.Lt[xkoko / 2 + 1][ykoko / 2 + 1] = 0;
+                ke.Lt[xkoko / 2 - 1][ykoko / 2] = 0;
+                ke.Lt[xkoko / 2][ykoko / 2 - 1] = 0;
+                ke.Lt[xkoko / 2 - 1][ykoko / 2 - 1] = 0;
             }
             catch (Exception)
             {
@@ -233,6 +232,151 @@ namespace peli1
                 throw;
             }
         }
+
+        private void TeeK(int xkoko,int ykoko) 
+        {
+            /* try
+             {*/
+
+
+            re = 0;
+            l =0;
+            for (int i = 0; i < xkoko; i++)
+            {
+                for (int j = 0; j < ykoko; j++)
+                {
+                    if (ke.Lt[i][j] == 1 || ke.Lt[i][j] == 2)
+                            {
+                        rec[re] = new Rectangle();
+                                //Rectangle rec = new Rectangle();
+                                Canvas.SetTop(rec[re], j * py); // VÄÄRINPÄIN OLIVAT
+                                Canvas.SetLeft(rec[re], i * px);
+                            rec[re].Width = px;
+                            rec[re].Height = py;
+                                if(ke.Lt[i][j] == 1) rec[re].Fill = new SolidColorBrush(Colors.Blue);
+                                if (ke.Lt[i][j] == 2) rec[re].Fill = new SolidColorBrush(Colors.Green);
+                            C.Children.Add(rec[re++]);
+                            //C.Children.Remove(rec);
+                            //C2[i *10, j *10] = 1;
+                            LaitaP(i * px, j * py, ke.Lt[i][j]); 
+                       
+                    }
+                    if (ke.Lt[i][j] == 3 || ke.Lt[i][j] == 5)
+                    {
+                        //Line myLine = new Line();
+                        line[l] = new Line();
+                        if (ke.Lt[i][j] == 3) line[l].Stroke = System.Windows.Media.Brushes.Blue;
+                        if (ke.Lt[i][j] == 5) line[l].Stroke = System.Windows.Media.Brushes.Green;
+                        line[l].X1 = i * px;
+                        line[l].X2 = i * px + px;
+                            line[l].Y1 = j * py + py / 2;
+                            line[l].Y2 = j * py + py / 2;
+                            line[l].HorizontalAlignment = HorizontalAlignment.Left;
+                            line[l].VerticalAlignment = VerticalAlignment.Center;
+                            line[l].StrokeThickness = 2;
+
+                            C.Children.Add(line[l]);
+                            LaitaL(line[l].X1, line[l].X2, line[l].Y1, line[l++].Y2, ke.Lt[i][j]);
+                    }
+                    if (ke.Lt[i][j] == 4 || ke.Lt[i][j] == 6)
+                    {
+
+                        line[l] = new Line();
+                        if (ke.Lt[i][j] == 4) line[l].Stroke = System.Windows.Media.Brushes.Blue;
+                        if (ke.Lt[i][j] == 6) line[l].Stroke = System.Windows.Media.Brushes.Green;
+                            line[l].X1 = i * px + px / 2;
+                            line[l].X2 = i * px + px / 2;
+                            line[l].Y1 = j * py;
+                            line[l].Y2 = j * py + py;
+                            line[l].HorizontalAlignment = HorizontalAlignment.Left;
+                            line[l].VerticalAlignment = VerticalAlignment.Center;
+                            line[l].StrokeThickness = 2;
+                            C.Children.Add(line[l]);
+
+                            LaitaL(line[l].X1, line[l].X2, line[l].Y1, line[l++].Y2, ke.Lt[i][j]);
+
+                    }
+                }
+            }
+           /* }
+            catch (Exception)
+            {
+
+                throw;
+            }*/
+        }
+
+       /* private void TeeUusi(int xkoko, int ykoko)
+        {
+            /* try
+             {*/
+
+
+          /*  r = 0, l = 0;
+            for (int i = 0; i < xkoko; i++)
+            {
+                for (int j = 0; j < ykoko; j++)
+                {
+                    if (ke.Lt[i][j] == 1 || ke.Lt[i][j] == 2)
+                    {
+                        //rec[r] = new Rectangle();
+                        //Rectangle rec = new Rectangle();
+                        Canvas.SetTop(rec[r], j * py); // VÄÄRINPÄIN OLIVAT
+                        Canvas.SetLeft(rec[r], i * px);
+                        rec[r].Width = px;
+                        rec[r].Height = py;
+                        if (ke.Lt[i][j] == 1) rec[r].Fill = new SolidColorBrush(Colors.Blue);
+                        if (ke.Lt[i][j] == 2) rec[r].Fill = new SolidColorBrush(Colors.Green);
+                        //C.Children.Add(rec[r++]);
+                        //C.Children.Remove(rec);
+                        //C2[i *10, j *10] = 1;
+                        LaitaP(i * px, j * py, ke.Lt[i][j]);
+
+                    }
+                    if (ke.Lt[i][j] == 3 || ke.Lt[i][j] == 5)
+                    {
+                        //Line myLine = new Line();
+                        //line[l] = new Line();
+                        if (ke.Lt[i][j] == 3) line[l].Stroke = System.Windows.Media.Brushes.Blue;
+                        if (ke.Lt[i][j] == 5) line[l].Stroke = System.Windows.Media.Brushes.Green;
+                        line[l].X1 = i * px;
+                        line[l].X2 = i * px + px;
+                        line[l].Y1 = j * py + py / 2;
+                        line[l].Y2 = j * py + py / 2;
+                        line[l].HorizontalAlignment = HorizontalAlignment.Left;
+                        line[l].VerticalAlignment = VerticalAlignment.Center;
+                        line[l].StrokeThickness = 2;
+
+                        //C.Children.Add(line[l]);
+                        LaitaL(line[l].X1, line[l].X2, line[l].Y1, line[l++].Y2, ke.Lt[i][j]);
+                    }
+                    if (ke.Lt[i][j] == 4 || ke.Lt[i][j] == 6)
+                    {
+
+                        //line[l] = new Line();
+                        if (ke.Lt[i][j] == 4) line[l].Stroke = System.Windows.Media.Brushes.Blue;
+                        if (ke.Lt[i][j] == 6) line[l].Stroke = System.Windows.Media.Brushes.Green;
+                        line[l].X1 = i * px + px / 2;
+                        line[l].X2 = i * px + px / 2;
+                        line[l].Y1 = j * py;
+                        line[l].Y2 = j * py + py;
+                        line[l].HorizontalAlignment = HorizontalAlignment.Left;
+                        line[l].VerticalAlignment = VerticalAlignment.Center;
+                        line[l].StrokeThickness = 2;
+                        //C.Children.Add(line[l]);
+
+                        LaitaL(line[l].X1, line[l].X2, line[l].Y1, line[l++].Y2, ke.Lt[i][j]);
+
+                    }
+                }
+            }*/
+            /* }
+             catch (Exception)
+             {
+
+                 throw;
+             }*/
+        //}
 
         private void AddPixel(double x, double y, Color c) // tätä ei käytetä hitauden vuoksi
         {
@@ -270,8 +414,8 @@ namespace peli1
         private void timer_Tick(object sender, EventArgs e)
         {
 
-            try
-            {
+           /* try
+            {*/
 
             
             Time += TimeSpan.FromMilliseconds(100);
@@ -286,6 +430,17 @@ namespace peli1
             if ((C2[myPa.Xpal, myPa.Ypal] == 2 || C2[myPa.Xpal, myPa.Ypal] == 5 || C2[myPa.Xpal, myPa.Ypal] == 6) && (myPa.Xspeed != 0 || myPa.Yspeed != 0))
             {
                 textBox1.Text = "Pisteet" + (pisteet++).ToString();
+                    if (pisteet > 10)
+                    {
+                        UusiK(20, 20, 10);
+                    for (int i = 0; i < re; i++) C.Children.Remove(rec[i]);
+                    for (int i = 0; i < l; i++) C.Children.Remove(line[i]);
+                    TeeK(20, 20);
+                        myPa.Xpal = 200;
+                        myPa.Ypal = 200;
+                        myPa.Xspeed = 0;
+                        myPa.Yspeed = 0;
+                    }
             }
                        
             if (myPa.Xspeed > 0)
@@ -329,12 +484,12 @@ namespace peli1
             {
                 if (myPa.Xspeed > -5) myPa.Xspeed--;
             }
-            }
+            /*}
             catch (Exception)
             {
 
                 throw;
-            }
+            }*/
 
         }
 
