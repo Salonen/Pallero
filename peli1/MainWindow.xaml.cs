@@ -51,7 +51,7 @@ namespace peli1
         Line myLine4 = new Line();
         Line myLine5 = new Line();
         Ellipse myEl = new Ellipse();
-        Pallero myPa = new Pallero(0, 0, 100, 100);
+        Pallero myPa = new Pallero(0, 0, 200, 200);
         Pali myPal = new Pali();
         Kentta ke = new Kentta();
 
@@ -95,9 +95,9 @@ namespace peli1
             Canvas.SetLeft(myEl, myPa.Xpal - (myEl.ActualWidth) / 2); //
             
             C.Children.Add(myEl);
-            Point myP = new Point();
+            /*Point myP = new Point();
             myP.X = 200; 
-            myP.Y = 200;
+            myP.Y = 200;*/
 
             Time = TimeSpan.Zero;
             timer = new DispatcherTimer();
@@ -560,6 +560,32 @@ namespace peli1
 
                 throw;
             }
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            speed -= speed > 5 ? 1 : 0;
+            timer.Interval = TimeSpan.FromMilliseconds(speed);
+            textBox2.Text = speed.ToString();
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            speed += speed < 30 ? 1 : 0;
+            timer.Interval = TimeSpan.FromMilliseconds(speed);
+            textBox2.Text = speed.ToString();
+        }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            taso -= taso > 5 ? 1 : 0;
+            textBox4.Text = taso.ToString();
+        }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            taso += taso < 30 ? 1 : 0;
+            textBox4.Text = taso.ToString();
         }
 
         private void TeeP(int xkoko,int ykoko)
