@@ -37,6 +37,8 @@ namespace peli1
         
         int n = 0;
         int re = 0, l = 0;
+        int taso = 30;
+        int speed = 20;
         //Line myLine = new Line();
         Line[] line = new Line[20*20*100];
         public DispatcherTimer timer;
@@ -81,7 +83,7 @@ namespace peli1
             for (int i = 0; i < 20 * 20; i++) */
 
                 TeeP(px, py);
-            AlustaK(20, 20, 10);
+            AlustaK(20, 20, taso);
             TeeK(20,20);
             TeeR();
            
@@ -99,7 +101,7 @@ namespace peli1
 
             Time = TimeSpan.Zero;
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(20); // Muuttele tätä
+            timer.Interval = TimeSpan.FromMilliseconds(speed); // Muuttele tätä
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
 
@@ -432,7 +434,10 @@ namespace peli1
                 textBox1.Text = "Pisteet" + (pisteet++).ToString();
                     if (pisteet > 10)
                     {
-                        UusiK(20, 20, 10);
+                    //speed -= speed > 5 ? 1 : 0;
+                    timer.Interval = TimeSpan.FromMilliseconds(speed);
+                    taso -= taso > 5 ? 1 : 0;
+                    UusiK(20, 20, taso);
                     for (int i = 0; i < re; i++) C.Children.Remove(rec[i]);
                     for (int i = 0; i < l; i++) C.Children.Remove(line[i]);
                     TeeK(20, 20);
@@ -440,7 +445,9 @@ namespace peli1
                         myPa.Ypal = 200;
                         myPa.Xspeed = 0;
                         myPa.Yspeed = 0;
-                    }
+                    pisteet = 0;
+                    
+                }
             }
                        
             if (myPa.Xspeed > 0)
